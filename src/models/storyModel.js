@@ -1,17 +1,15 @@
 const mongoose = require("mongoose");
 
-const StoryModel = mongoose.model(
-    "projet-conte",
-    {
-        title: {
-            type: String,
-            required: true
-        },
-        archive:{
-            type: Date
-        }
+const schema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
     },
-    "story"
-);
+    archive:{
+        type: Date
+    }
+});
+
+const StoryModel = mongoose.model("story",schema, 'story');
 
 module.exports = {StoryModel}; 
