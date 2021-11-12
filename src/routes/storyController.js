@@ -4,7 +4,8 @@ const router = express.Router();
 const {StoryModel} = require('../models/storyModel');
 
 router.get('/', (req, res) => {
-    StoryModel.find((err, stories) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    StoryModel.find({archive: null},(err, stories) => {
         if(!err) res.send(stories);
         else console.log('Error to get data:' + err);
     });
@@ -22,7 +23,8 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) =>{
     console.log(req)
     const newStory = new StoryModel({
-        title: req.body.title
+        title: req.body.title,
+        archive: null
     });
 
     newStory.save((err,story) => {
@@ -32,10 +34,23 @@ router.post('/', (req, res) =>{
 });
 
 router.delete('/:id', (req, res) =>{
-    StoryModel.deleteOne({_id: req.params.id}, (err, story) => {
-        if(!err) res.send(story);
+
+    let storyToUpdate = {};
+    StoryModel.findOne({_id: req.params.id}, (err, story) => {
+        if(!err) {
+            storyToUpdate = story;
+            storyToUpdate.archive = Date.now();
+            StoryModel.updateOne(
+                {_id: req.params.id}, 
+                storyToUpdate,
+                (err, story) => {
+                if(!err) res.send(storyToUpdate);
+                else console.log('Error find story :' + err);
+            })
+        }
         else console.log('Error find story :' + err);
-    })
+    });
+    
 })
 
 module.exports = router;

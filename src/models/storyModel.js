@@ -6,6 +6,9 @@ const StoryModel = mongoose.model(
         title: {
             type: String,
             required: true
+        },
+        archive:{
+            type: Date
         }
     },
     "story"
