@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/OneById/:id', (req, res) => {
     
     console.log(req.params.id);
     StoryModel.findOne({_id: req.params.id}, (err, story) => {
