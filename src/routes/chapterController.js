@@ -18,9 +18,15 @@ router.get('/oneById/:id', (req, res) => {
     });
 });
 
+router.get('/firstChapterOfStoryByStoryId/:story_id', (req, res) => {
+    ChapterModel.findOne({archive: null, start: true, story: req.params.story_id}, (err, chapter) => {
+        if(!err) res.send(chapter);
+        else console.log('Error to get data:' + err);
+    })
+})
+
 
 router.post('/', (req, res) =>{
-    console.log(req)
     const newChapter = new ChapterModel({
         title: req.body.title,
         content: req.body.content,
