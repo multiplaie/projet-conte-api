@@ -27,19 +27,37 @@ router.get('/firstChapterOfStoryByStoryId/:story_id', (req, res) => {
 
 
 router.post('/', (req, res) =>{
-    const newChapter = new ChapterModel({
-        title: req.body.title,
-        content: req.body.content,
-        annotations: req.body.annotations,
-        children: req.body.children,
-        assets: req.body.assets,
-        story: req.body.story,
-        archive: null
-    });
-    newChapter.save((err,chapter) => {
-        if(!err) res.send(chapter);
-        else console.log('Error creating new data : '+ err)
-    });
+    
+    if(req.body._id){
+        ChapterModel.updateOne(
+            {_id: req.body._id},
+            req.body,
+            (err, changes) => {
+                if(!err){
+                    res.send(req.body);
+                    console.log(req.body);
+                    console.log(changes)
+                } 
+                else console.log('Error find chapter :' + err)
+            }
+        )
+    }else{
+        const chapter = new ChapterModel({
+            title: req.body.title,
+            content: req.body.content,
+            annotations: req.body.annotations,
+            children: req.body.children,
+            assets: req.body.assets,
+            story: req.body.story,
+            archive: null
+        });
+        chapter.save((err,current_chapter) => {
+            if(!err) res.send(current_chapter);
+            else console.log('Error creating new data : '+ err)
+        });
+    }
+    
+
 });
 
 
