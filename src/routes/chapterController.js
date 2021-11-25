@@ -34,8 +34,6 @@ router.post('/', (req, res) =>{
             (err, changes) => {
                 if(!err){
                     res.send(req.body);
-                    console.log(req.body);
-                    console.log(changes)
                 } 
                 else console.log('Error find chapter :' + err)
             }
@@ -45,7 +43,7 @@ router.post('/', (req, res) =>{
             title: req.body.title,
             content: req.body.content,
             annotations: req.body.annotations,
-            children: req.body.children,
+            parent: req.body.parent,
             assets: req.body.assets,
             story: req.body.story,
             archive: null,
