@@ -27,7 +27,6 @@ router.get('/firstChapterOfStoryByStoryId/:story_id', (req, res) => {
 
 
 router.post('/', (req, res) =>{
-    
     if(req.body._id){
         ChapterModel.updateOne(
             {_id: req.body._id},
@@ -49,7 +48,8 @@ router.post('/', (req, res) =>{
             children: req.body.children,
             assets: req.body.assets,
             story: req.body.story,
-            archive: null
+            archive: null,
+            start: req.body.start
         });
         chapter.save((err,current_chapter) => {
             if(!err) res.send(current_chapter);

@@ -25,6 +25,10 @@ const schema = new mongoose.Schema({
     },
     archive:{
         type: Date
+    },
+    start: {
+        type: Boolean,
+        required: true
     }
 });
 
