@@ -5,6 +5,26 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    narrative_element:{
+        type: String,
+        required: false
+    },
+    characters: {
+        type: String,
+        required: false
+    },
+    place: {
+        type: String,
+        required: false
+    },
+    pitch:{
+        type: String,
+        required: true
+    },
+    developpement:{
+        type: String,
+        required: false
+    },
     archive:{
         type: Date
     }

@@ -21,16 +21,31 @@ router.get('/OneById/:id', (req, res) => {
 });
 
 router.post('/', (req, res) =>{
-    console.log(req)
-    const newStory = new StoryModel({
-        title: req.body.title,
-        archive: null
-    });
-
-    newStory.save((err,story) => {
-        if(!err) res.send(story);
-        else console.log('Error creating new data : '+ err)
-    });
+    if (req.body._id){
+        StoryModel.updateOne(
+            {_id: req.body._id},
+            req.body,
+            (err, changes) => {
+                if(!err) res.send(req.body)
+                else console.log('Error find story :' + err)
+            }
+        )
+    }else{
+        const newStory = new StoryModel({
+            title: req.body.title,
+            narrative_element: req.body.narrative_element,
+            characters: req.body.characters,
+            place: req.body.place,
+            pitch: req.body.pitch,
+            developpement: req.body.developpement,
+            archive: null
+        });
+    
+        newStory.save((err,story) => {
+            if(!err) res.send(story);
+            else console.log('Error creating new data : '+ err)
+        });
+    }
 });
 
 router.delete('/:id', (req, res) =>{
