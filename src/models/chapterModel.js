@@ -14,7 +14,7 @@ const schema = new mongoose.Schema({
         required: true
     },
     parent: {
-        type: Array
+        type: String
     },
     assets: {
         type: Array
