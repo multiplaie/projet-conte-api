@@ -37,7 +37,7 @@ router.post('/', (req, res) =>{
             characters: req.body.characters,
             place: req.body.place,
             pitch: req.body.pitch,
-            developpement: req.body.developpement,
+            development: req.body.development,
             archive: null
         });
     

@@ -21,7 +21,7 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    developpement:{
+    development:{
         type: String,
         required: false
     },
