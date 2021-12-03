@@ -15,6 +15,6 @@ app.use(function(req, res, next) {
 });
 app.use('/api/story', storyController);
 app.use('/api/chapter', chapterController);
-app.use('/api/media', chapterController);
+app.use('/api/media', mediaController);
 
 app.listen(config.app.port, () => console.log('Server started: '+config.app.port));
